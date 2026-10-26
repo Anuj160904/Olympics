@@ -1,0 +1,356 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<workbook original-version='18.1' source-build='2023.2.0' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <IntuitiveSorting />
+    <IntuitiveSorting_EncodingBy />
+    <SavedScenes />
+    <ZoneBackgroundTransparency />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='cleaned_olympic_data' inline='true' name='federated.olympics' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cleaned_olympic_data' name='textscan.olympics'>
+            <connection class='textscan' directory='../data' filename='cleaned_olympic_data.csv'>
+            </connection>
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.olympics' name='cleaned_olympic_data.csv' table='[cleaned_olympic_data#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='RecordID' ordinal='0' />
+            <column datatype='string' name='Country' ordinal='1' />
+            <column datatype='string' name='CountryCode' ordinal='2' />
+            <column datatype='string' name='Region' ordinal='3' />
+            <column datatype='string' name='Sport' ordinal='4' />
+            <column datatype='string' name='SportCategory' ordinal='5' />
+            <column datatype='integer' name='Year' ordinal='6' />
+            <column datatype='string' name='Season' ordinal='7' />
+            <column datatype='string' name='HostNation' ordinal='8' />
+            <column datatype='string' name='IsHostNation' ordinal='9' />
+            <column datatype='integer' name='GoldMedals' ordinal='10' />
+            <column datatype='integer' name='SilverMedals' ordinal='11' />
+            <column datatype='integer' name='BronzeMedals' ordinal='12' />
+            <column datatype='integer' name='TotalMedals' ordinal='13' />
+            <column datatype='integer' name='AthletesCount' ordinal='14' />
+            <column datatype='real' name='SportsInvestmentMillions' ordinal='15' />
+            <column datatype='real' name='MedalsPerAthlete' ordinal='16' />
+            <column datatype='real' name='MedalEfficiencyPct' ordinal='17' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Country</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Country]</local-name>
+            <parent-name>[cleaned_olympic_data.csv]</parent-name>
+            <remote-alias>Country</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Region</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Region]</local-name>
+            <parent-name>[cleaned_olympic_data.csv]</parent-name>
+            <remote-alias>Region</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SportCategory</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[SportCategory]</local-name>
+            <parent-name>[cleaned_olympic_data.csv]</parent-name>
+            <remote-alias>SportCategory</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TotalMedals</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[TotalMedals]</local-name>
+            <parent-name>[cleaned_olympic_data.csv]</parent-name>
+            <remote-alias>TotalMedals</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>AthletesCount</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[AthletesCount]</local-name>
+            <parent-name>[cleaned_olympic_data.csv]</parent-name>
+            <remote-alias>AthletesCount</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Avg Medals Per Athlete Calculated' datatype='real' default-format='n0.000' name='[Calculation_Medals_Per_Athlete]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([TotalMedals]) / SUM([AthletesCount])' />
+      </column>
+      <column caption='Cost Per Medal ($M)' datatype='real' default-format='c$&quot;M&quot;0.00' name='[Calculation_Cost_Per_Medal]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([SportsInvestmentMillions]) / SUM([TotalMedals])' />
+      </column>
+      <column datatype='string' name='[Country]' role='dimension' semantic-role='[Country].[Name]' type='nominal' />
+      <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+      <column datatype='string' name='[SportCategory]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Sport]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Season]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Year]' role='dimension' type='ordinal' />
+      <column datatype='integer' name='[TotalMedals]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[AthletesCount]' role='measure' type='quantitative' />
+      <column datatype='real' name='[SportsInvestmentMillions]' role='measure' type='quantitative' />
+      <column datatype='real' name='[MedalEfficiencyPct]' role='measure' type='quantitative' />
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='1_Medals_Per_Athlete_by_Category'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='string' name='[SportCategory]' role='dimension' type='nominal' />
+            <column datatype='real' name='[Calculation_Medals_Per_Athlete]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.olympics].[none:SportCategory:nk]</rows>
+        <cols>[federated.olympics].[usr:Calculation_Medals_Per_Athlete:qk]</cols>
+      </table>
+      <simple-id uuid='ws-oly-1' />
+    </worksheet>
+    <worksheet name='2_Global_Performance_by_Country'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='string' name='[Country]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[TotalMedals]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.olympics].[none:Country:nk]</rows>
+        <cols>[federated.olympics].[sum:TotalMedals:qk]</cols>
+      </table>
+      <simple-id uuid='ws-oly-2' />
+    </worksheet>
+    <worksheet name='3_Trend_Total_Medals_Over_Years'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='integer' name='[Year]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[TotalMedals]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>[federated.olympics].[sum:TotalMedals:qk]</rows>
+        <cols>[federated.olympics].[none:Year:ok]</cols>
+      </table>
+      <simple-id uuid='ws-oly-3' />
+    </worksheet>
+    <worksheet name='4_Investment_vs_Medal_Performance'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='real' name='[SportsInvestmentMillions]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[TotalMedals]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Country]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+          </pane>
+        </panes>
+        <rows>[federated.olympics].[sum:TotalMedals:qk]</rows>
+        <cols>[federated.olympics].[sum:SportsInvestmentMillions:qk]</cols>
+      </table>
+      <simple-id uuid='ws-oly-4' />
+    </worksheet>
+    <worksheet name='5_Medal_Efficiency_by_Region'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='real' name='[MedalEfficiencyPct]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Pie' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='ws-oly-5' />
+    </worksheet>
+    <worksheet name='6_Medal_Totals_Across_Olympic_Hosts'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='string' name='[HostNation]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[TotalMedals]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.olympics].[none:HostNation:nk]</rows>
+        <cols>[federated.olympics].[sum:TotalMedals:qk]</cols>
+      </table>
+      <simple-id uuid='ws-oly-6' />
+    </worksheet>
+    <worksheet name='7_Regional_Medal_Distribution_by_Sport'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cleaned_olympic_data' name='federated.olympics' />
+          </datasources>
+          <datasource-dependencies datasource='federated.olympics'>
+            <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+            <column datatype='string' name='[SportCategory]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[TotalMedals]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.olympics].[none:Region:nk]</rows>
+        <cols>[federated.olympics].[sum:TotalMedals:qk]</cols>
+      </table>
+      <simple-id uuid='ws-oly-7' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Dashboard_1_Olympic_Performance'>
+      <style />
+      <size maxheight='850' maxwidth='1200' minheight='850' minwidth='1200' type='fixed' />
+      <zones>
+        <zone h='100000' id='1' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='96000' id='2' param='vert' type-v2='layout-flow' w='98000' x='1000' y='2000'>
+            <zone h='32000' id='3' name='1_Medals_Per_Athlete_by_Category' w='98000' x='1000' y='2000' />
+            <zone h='32000' id='4' name='2_Global_Performance_by_Country' w='98000' x='1000' y='34000' />
+            <zone h='32000' id='5' name='3_Trend_Total_Medals_Over_Years' w='98000' x='1000' y='66000' />
+          </zone>
+        </zone>
+      </zones>
+      <simple-id uuid='dash-oly-1' />
+    </dashboard>
+    <dashboard name='Dashboard_2_Olympic_Performance_and_Regional_Efficiency'>
+      <style />
+      <size maxheight='850' maxwidth='1200' minheight='850' minwidth='1200' type='fixed' />
+      <zones>
+        <zone h='100000' id='10' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='96000' id='11' param='vert' type-v2='layout-flow' w='98000' x='1000' y='2000'>
+            <zone h='48000' id='12' name='4_Investment_vs_Medal_Performance' w='98000' x='1000' y='2000' />
+            <zone h='48000' id='13' name='5_Medal_Efficiency_by_Region' w='98000' x='1000' y='50000' />
+          </zone>
+        </zone>
+      </zones>
+      <simple-id uuid='dash-oly-2' />
+    </dashboard>
+  </dashboards>
+  <windows>
+    <window class='worksheet' name='1_Medals_Per_Athlete_by_Category'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+</workbook>
